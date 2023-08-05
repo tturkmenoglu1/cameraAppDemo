@@ -31,6 +31,18 @@ export default function App() {
     }
   }
 
+  const saveImage = async () => {
+    if (image) {
+      try {
+        await MediaLibrary.createAssetAsync(image);
+        alert('Picture saved!')
+        setImage(null);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
   if (hasCameraPermission === false) {
     return <Text>No access to camera</Text>
   }
@@ -44,13 +56,42 @@ export default function App() {
           flashMode={flash}
           ref={cameraRef}
         >
-          <Text>Hello</Text>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: 30,
+          }}>
+            <Button icon={'retweet'} onPress={() => {
+              setType(type === CameraType.back ? CameraType.front : CameraType.back)
+            }}/>
+            <Button icon={'flash'}
+              color={flash === Camera.Constants.FlashMode.off ? 'gray' : '#f1f1f1'}
+              onPress={() => {
+              setFlash(flash === Camera.Constants.FlashMode.off
+                ? Camera.Constants.FlashMode.on
+                : Camera.Constants.FlashMode.off
+              )
+              }} />
+            </View>
         </Camera>
         :
         <Image source={{ uri: image }} style={styles.camera}/>
       }
       <View>
-        <Button title={'Take a picture'} icon={'camera'} onPress={takePicture}/>
+        {image ?
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal:50
+          }}>
+            <Button title={"Re-take"} icon="retweet" onPress={()=> setImage(null)}/>
+            <Button title={"Save"} icon="check" onPress={saveImage}/>
+          </View>
+          :
+          <Button title={'Take a picture'} icon="camera" onPress={takePicture}/>
+        }
+        
       </View>
 
     </View>
