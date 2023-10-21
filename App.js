@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Constants from 'expo-constants';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import Button from './src/components/Button';
+import Button from './src/components/button';
 
 export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   button: {
     height: 40,
     borderRadius: 6,
-    flexDirection: 'row',
+    flexDirection: 'row', 
     alignItems: 'center',
     justifyContent: 'center',
   },
