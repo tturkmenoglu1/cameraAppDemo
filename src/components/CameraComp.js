@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import Button from './Button';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 
 export default function CameraComp() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -11,6 +12,7 @@ export default function CameraComp() {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
+  
 
   useEffect(() => {
     (async () => {
@@ -85,6 +87,8 @@ export default function CameraComp() {
               icon="flash"
               color={flash === Camera.Constants.FlashMode.off ? 'gray' : '#fff'}
             />
+
+            
           </View>
         </Camera>
       ) : (
