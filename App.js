@@ -21,7 +21,8 @@ export default function App() {
       {/* Ana ekran içeriği */}
       {isCameraOpen ? (
         <>
-        <Button
+          <Button
+          style={styles.button}
           title=""
           icon="cross"
           onPress={() => {
@@ -51,6 +52,13 @@ export default function App() {
         </>
       )}
     </View>
-  )
+  )  
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#000000',
+  },
+});
+
 
